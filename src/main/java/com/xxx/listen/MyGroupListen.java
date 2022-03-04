@@ -2,7 +2,9 @@ package com.xxx.listen;
 
 import com.dtflys.forest.utils.StringUtils;
 import com.xxx.Pojo.AIChat;
+import com.xxx.Pojo.ChickenSoup;
 import com.xxx.client.AIClient;
+import com.xxx.client.ChickenSoupClient;
 import com.xxx.client.LoveStoryClient;
 import com.xxx.client.WeatherClient;
 import love.forte.simbot.annotation.Filter;
@@ -16,6 +18,7 @@ import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author mpj
@@ -83,6 +86,26 @@ public class MyGroupListen {
 	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "爱你", matchType = MatchType.REGEX_FIND)
 	public void getLoveStory(GroupMsg groupMsg, MsgSender sender) {
 		String result = loveStoryClient.getLoveStory();
-		sender.SENDER.sendGroupMsg(groupMsg, result);
+		if (StringUtils.isNotEmpty(result)) {
+			sender.SENDER.sendGroupMsg(groupMsg, result);
+			return;
+		}
+		sender.SENDER.sendGroupMsg(groupMsg, "没有找到情话!");
+	}
+
+	@Resource
+	private ChickenSoupClient chickenSoupClient;
+
+	@OnGroup
+	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "鸡汤", matchType = MatchType.REGEX_FIND)
+	public void getChickenSoupClient(GroupMsg groupMsg, MsgSender sender) {
+		ChickenSoup chickenSoup = chickenSoupClient.getChickenSoup();
+		if (Objects.nonNull(chickenSoup)) {
+			if (StringUtils.isNotEmpty(chickenSoup.getData())) {
+				sender.SENDER.sendGroupMsg(groupMsg, chickenSoup.getData());
+				return;
+			}
+		}
+		sender.SENDER.sendGroupMsg(groupMsg, "没有查到鸡汤!");
 	}
 }
