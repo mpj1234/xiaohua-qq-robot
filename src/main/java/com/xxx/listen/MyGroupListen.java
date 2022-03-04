@@ -3,6 +3,7 @@ package com.xxx.listen;
 import com.dtflys.forest.utils.StringUtils;
 import com.xxx.Pojo.AIChat;
 import com.xxx.client.AIClient;
+import com.xxx.client.LoveStoryClient;
 import com.xxx.client.WeatherClient;
 import love.forte.simbot.annotation.Filter;
 import love.forte.simbot.annotation.OnGroup;
@@ -59,6 +60,7 @@ public class MyGroupListen {
 
 	@Resource
 	private AIClient aiClient;
+
 	@OnGroup
 	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "AIClient|aiClient", matchType = MatchType.REGEX_FIND)
 	public void getAIChat(GroupMsg groupMsg, MsgSender sender) {
@@ -72,5 +74,15 @@ public class MyGroupListen {
 			String content = aiChat.getContent();
 			sender.SENDER.sendGroupMsg(groupMsg, content);
 		}
+	}
+
+	@Resource
+	private LoveStoryClient loveStoryClient;
+
+	@OnGroup
+	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "爱你", matchType = MatchType.REGEX_FIND)
+	public void getLoveStory(GroupMsg groupMsg, MsgSender sender) {
+		String result = loveStoryClient.getLoveStory();
+		sender.SENDER.sendGroupMsg(groupMsg, result);
 	}
 }
