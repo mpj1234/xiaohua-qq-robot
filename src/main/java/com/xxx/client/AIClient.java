@@ -12,7 +12,7 @@ import com.xxx.Pojo.AIChat;
  * @since jdk1.8
  **/
 @BaseRequest(baseURL = "http://api.qingyunke.com/api.php?key=free&appid=0&")
-public interface AI {
+public interface AIClient {
 	@Get("msg={0}")
 	AIChat getAIChat(@Query("msg") String msg);
 }

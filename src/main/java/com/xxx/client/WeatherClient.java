@@ -11,7 +11,7 @@ import java.util.Map;
  * @date 2022/2/23 13:39
  * @since jdk1.8
  **/
-public interface Weather {
+public interface WeatherClient {
  @Get("https://wis.qq.com/weather/common?source=pc&weather_type=observe%7Cforecast_24h&province={0}&city={1}")
  Map<String, Object> getWeather(@Query String province, @Query String city);
 }

@@ -2,8 +2,8 @@ package com.xxx.listen;
 
 import com.dtflys.forest.utils.StringUtils;
 import com.xxx.Pojo.AIChat;
-import com.xxx.client.AI;
-import com.xxx.client.Weather;
+import com.xxx.client.AIClient;
+import com.xxx.client.WeatherClient;
 import love.forte.simbot.annotation.Filter;
 import love.forte.simbot.annotation.OnGroup;
 import love.forte.simbot.api.message.events.GroupMsg;
@@ -33,8 +33,8 @@ public class MyGroupListen {
 		sender.SENDER.sendGroupMsg(groupMsg, printStr);
 	}
 
-	@Resource(description = "weather")
-	private Weather weather;
+	@Resource(description = "weatherClient")
+	private WeatherClient weatherClient;
 	final int WEATHER_FORMAT_LENGTH = 3;
 
 	@OnGroup
@@ -46,8 +46,8 @@ public class MyGroupListen {
 			if (args.length == WEATHER_FORMAT_LENGTH) {
 				String province = args[1];
 				String city = args[2];
-				System.out.println(this.weather);
-				Map<String, Object> weather = this.weather.getWeather(province, city);
+				System.out.println(this.weatherClient);
+				Map<String, Object> weather = this.weatherClient.getWeather(province, city);
 				Map data = (Map) weather.get("data");
 				Map forecast_24h = (Map) data.get("forecast_24h");
 				Map today = (Map) forecast_24h.get("0");
@@ -58,17 +58,17 @@ public class MyGroupListen {
 	}
 
 	@Resource
-	private AI ai;
+	private AIClient aiClient;
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "AI|ai", matchType = MatchType.REGEX_FIND)
+	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "AIClient|aiClient", matchType = MatchType.REGEX_FIND)
 	public void getAIChat(GroupMsg groupMsg, MsgSender sender) {
 		String text = groupMsg.getText();
 		if (StringUtils.isNotEmpty(text)) {
 			String substring = text.replace("ai", "");
-			substring = substring.replace("AI", "");
+			substring = substring.replace("AIClient", "");
 			System.out.println(substring);
 			String trim = substring.trim();
-			AIChat aiChat = this.ai.getAIChat(trim);
+			AIChat aiChat = this.aiClient.getAIChat(trim);
 			String content = aiChat.getContent();
 			sender.SENDER.sendGroupMsg(groupMsg, content);
 		}
