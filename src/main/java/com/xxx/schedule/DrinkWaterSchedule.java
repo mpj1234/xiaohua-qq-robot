@@ -36,7 +36,6 @@ public class DrinkWaterSchedule {
 			if (StringUtils.isNotEmpty(chickenSoup.getData())) {
 				sender.SENDER.sendGroupMsg("779746363", chickenSoup.getData());
 				sender.SENDER.sendGroupMsg("639075263", chickenSoup.getData());
-				return;
 			}
 		}
 		sender.SENDER.sendGroupMsg("779746363", "看鸡汤的同时，也该喝水啦！！！");

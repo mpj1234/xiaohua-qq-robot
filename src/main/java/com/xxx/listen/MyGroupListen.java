@@ -65,7 +65,7 @@ public class MyGroupListen {
 	private AIClient aiClient;
 
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "AIClient|aiClient", matchType = MatchType.REGEX_FIND)
+	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "ai|AI", matchType = MatchType.REGEX_FIND)
 	public void getAIChat(GroupMsg groupMsg, MsgSender sender) {
 		String text = groupMsg.getText();
 		if (StringUtils.isNotEmpty(text)) {
