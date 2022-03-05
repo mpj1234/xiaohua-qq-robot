@@ -8,6 +8,7 @@ import com.xxx.client.ChickenSoupClient;
 import com.xxx.client.LoveStoryClient;
 import com.xxx.client.WeatherClient;
 import love.forte.simbot.annotation.Filter;
+import love.forte.simbot.annotation.ListenGroup;
 import love.forte.simbot.annotation.OnGroup;
 import love.forte.simbot.api.message.events.GroupMsg;
 import love.forte.simbot.api.sender.MsgSender;
@@ -27,9 +28,11 @@ import java.util.Objects;
  * @since jdk1.8
  **/
 @Component
+@ListenGroup("group1")
 public class MyGroupListen {
+
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "时间", matchType = MatchType.EQUALS)
+	@Filter(value = "时间", matchType = MatchType.EQUALS)
 	public void groupDatePrint(GroupMsg groupMsg, MsgSender sender) {
 		LocalDate localDate = LocalDate.now();
 		LocalTime localTime = LocalTime.now();
@@ -42,7 +45,7 @@ public class MyGroupListen {
 	final int WEATHER_FORMAT_LENGTH = 3;
 
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "天气", matchType = MatchType.REGEX_FIND)
+	@Filter(value = "天气", matchType = MatchType.REGEX_FIND)
 	public void getWeather(GroupMsg groupMsg, MsgSender sender) {
 		String text = groupMsg.getText();
 		if (StringUtils.isNotEmpty(text)) {
@@ -65,7 +68,7 @@ public class MyGroupListen {
 	private AIClient aiClient;
 
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "ai|AI", matchType = MatchType.REGEX_FIND)
+	@Filter(value = "ai|AI", matchType = MatchType.REGEX_FIND)
 	public void getAIChat(GroupMsg groupMsg, MsgSender sender) {
 		String text = groupMsg.getText();
 		if (StringUtils.isNotEmpty(text)) {
@@ -83,7 +86,7 @@ public class MyGroupListen {
 	private LoveStoryClient loveStoryClient;
 
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "爱你", matchType = MatchType.REGEX_FIND)
+	@Filter(value = "爱你", matchType = MatchType.REGEX_FIND)
 	public void getLoveStory(GroupMsg groupMsg, MsgSender sender) {
 		String result = loveStoryClient.getLoveStory();
 		if (StringUtils.isNotEmpty(result)) {
@@ -97,7 +100,7 @@ public class MyGroupListen {
 	private ChickenSoupClient chickenSoupClient;
 
 	@OnGroup
-	@Filter(groups = {"866618728", "639075263", "771374980", "779746363"}, value = "鸡汤", matchType = MatchType.REGEX_FIND)
+	@Filter(value = "鸡汤", matchType = MatchType.REGEX_FIND)
 	public void getChickenSoupClient(GroupMsg groupMsg, MsgSender sender) {
 		ChickenSoup chickenSoup = chickenSoupClient.getChickenSoup();
 		if (Objects.nonNull(chickenSoup)) {

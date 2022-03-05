@@ -1,7 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
 simbot:
-# 下面两行注释和simbot-bots/simbot.bot配置其中一个就行
-#  core:
-#    bots: 账号:密码
+  # 下面两行注释和simbot-bots/simbot.bot配置其中一个就行
+  #  core:
+  #    bots: 账号:密码
   component:
     mirai:
       # mirai心跳周期. 过长会导致被服务器断开连接. 单位毫秒。

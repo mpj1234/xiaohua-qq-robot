@@ -1,0 +1,5 @@
+listen:
+  groups:
+    groups:
+      - "123456"
+      - "群号"
