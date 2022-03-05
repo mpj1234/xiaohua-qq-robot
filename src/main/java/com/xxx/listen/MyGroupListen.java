@@ -109,6 +109,6 @@ public class MyGroupListen {
 				return;
 			}
 		}
-		sender.SENDER.sendGroupMsg(groupMsg, "没有查到鸡汤!");
+		sender.SENDER.sendGroupMsg(groupMsg, "没有查到鸡·汤!");
 	}
 }
