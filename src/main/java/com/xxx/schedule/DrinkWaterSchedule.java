@@ -5,6 +5,7 @@ import com.xxx.Pojo.ChickenSoup;
 import com.xxx.client.ChickenSoupClient;
 import love.forte.simbot.api.sender.BotSender;
 import love.forte.simbot.bot.BotManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
  **/
 @Component
 public class DrinkWaterSchedule {
-	@Resource
+	@Autowired
 	private BotManager botManager;
 	@Resource
 	private ChickenSoupClient chickenSoupClient;

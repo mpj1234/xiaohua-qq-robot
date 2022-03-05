@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: dev
 
 simbot:
   # 下面两行注释和simbot-bots/simbot.bot配置其中一个就行
